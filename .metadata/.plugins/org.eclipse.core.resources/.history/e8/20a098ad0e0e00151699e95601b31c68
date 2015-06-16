@@ -1,0 +1,21 @@
+
+public class ArrayStrings {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String test = "ciao";
+		System.out.println(unique(test.toCharArray()));
+		
+		
+		
+	}
+	
+	static boolean unique( char[] s){
+		
+		return true;
+	}
+
+}

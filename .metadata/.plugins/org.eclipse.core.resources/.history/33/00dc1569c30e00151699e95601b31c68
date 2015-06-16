@@ -1,0 +1,104 @@
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collections;
+
+
+public class ArrayStrings {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String test = "2098";
+		char[] s = test.toCharArray();
+		char[] t = mergesort(s, 0, test.length()-1);
+		//System.out.println(unique(test.toCharArray()));
+		System.out.println(t);
+	}
+	
+	
+	/**** 
+	 * Implement an algorithm to determine if a string has all unique characters
+	 */
+	static boolean unique( char[] s){
+		BitSet 	mask = new BitSet();
+		
+		for(char c: s){
+			if (mask.get(c))
+				return false;
+			mask.set(c);
+		}
+		return true;
+	}
+	
+	/** same as before without using additional data structures 
+	 * */
+	
+	
+	static char[] mergesort(char[] s, int sx, int dx ){
+		if ( sx == dx )
+			return s;
+		
+		int center = 0;
+		char [] s1 = null;
+		char[] s2 = null;
+		char[] result = null;
+		
+	    if (sx < dx) {
+	        center = ( sx + dx ) / 2;
+	        s1 = mergesort(s, sx, center);
+	        s2 = mergesort(s, center+1, dx);
+	        result = merge(s, sx, center, dx);
+	        //System.out.println(s);
+	    }
+	    
+	    return result;
+		
+	}
+	
+	static char[] merge(char[] s, int sx, int center, int dx){
+		//ArrayList<Character> support = new ArrayList<Character>();
+		char[] support = new char[s.length];
+		int i = sx;
+		int j = dx;
+		int k = 0;
+		
+		while((i<=center) && (j<=dx)){
+			if(s[i] < s[j]){
+				support[k] = s[i];
+				i ++;
+				k++;
+			}
+				else{
+					support[k]= s[j];
+					j ++;
+					k ++;
+				}
+		}
+		for( ; i<=center; i++){
+			support[k] = s[i];
+			k ++;
+		}
+		for(; j<=dx; j++){
+			support[k] = s[j];
+			k ++;
+		}
+				
+					
+			//for(int k = 0; k<support.size(); k++ )
+				//s[k] = support.get(k);
+			
+		System.out.println(support);
+			return support;
+		
+	}
+	
+	static boolean uniqueness( char[] s){
+		mergesort(s, 0, s.length );
+		
+		return true;
+		
+	}
+
+}

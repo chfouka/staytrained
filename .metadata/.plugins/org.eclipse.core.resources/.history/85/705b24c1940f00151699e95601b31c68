@@ -1,0 +1,144 @@
+import java.util.ArrayList;
+import java.util.BitSet;
+
+public class ArrayStrings {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String test = "acrfaedf";
+		char[] s = test.toCharArray();
+		mergesort(s, 0, test.length()-1);
+		//System.out.println(unique(test.toCharArray()));
+		System.out.println(s);
+	}
+	
+	
+	/**** 
+	 * Implement an algorithm to determine if a string has all unique characters
+	 */
+	static boolean unique( char[] s ){
+		BitSet 	mask = new BitSet();
+		
+		for(char c: s){
+			if (mask.get(c))
+				return false;
+			mask.set(c);
+		}
+		return true;
+	}
+	
+	/** same as before without using additional data structures 
+	 * */
+	
+	
+	static char[] mergesort(char[] s, int sx, int dx ){
+		if (s.length == 1)
+			return s;
+		
+		int center = s.length / 2  ;
+		int rst = s.length % 2;
+		
+		char[] s1 = new char[center];
+		char[] s2 = new char[center + rst];
+		int k = 0;
+		
+		for(int i = 0; i<center; i++){
+			s1[k] = s[i];
+			k++;
+		}
+		
+	    if (sx < dx) {
+	        center = ( sx + dx ) / 2;
+	        mergesort(s, sx, center);
+	        mergesort(s, center+1, dx);
+	       // merge(s, sx, center, dx);
+	    }
+		return null;
+		
+	}
+	
+	static char[] merge(char[] s1, char[] s2){
+		char[] r = new char[s1.length + s2.length]; 
+		int k = 0;
+		int i = 0;
+		int j = 0;
+		
+		while( (i<= s1.length) && (j<= s2.length) ){
+			if(s1[i] < s2[j]){
+				r[k] = s1[i];
+				i++;
+				k++;
+			}
+			
+			else{
+				r[k] = s2[j];
+				j++;
+				k++;
+			}
+		}
+		/*
+		//ArrayList<Character> support = new ArrayList<Character>();
+		//char[] support = new char[s.length];
+		int i = sx;
+		int j = dx;
+		//int k = 0;
+		
+		while( (i<=center) && (j<=dx) ){
+			if(s[i] < s[j]){
+				support.add(s[i]);
+				i ++;
+				//k++;
+			}
+			else{
+				support.add(s[j]);
+				j ++;
+				//k ++;
+			}
+		}
+		*/
+		
+		for( ; i<=center; i++){
+			r[k] = s1[i];
+			k ++;
+		}
+		
+		for(; j<=dx; j++){
+			r[k] = s2[j] ;
+			k ++;
+		}		
+			
+	
+		
+		//System.out.println(s);
+			
+		return r;
+		
+	}
+	
+	static boolean uniqueness( char[] s){
+		mergesort(s, 0, s.length );
+		
+		return true;
+		
+	}
+	
+	
+	/*static void reverse( char[] s ){
+		if(s.length == 2)
+			return s;
+		
+		else {
+			
+			char[] sm = reverse ( ... );
+			
+			return concat(sm, s[0]);
+			
+		}
+		
+		
+	}*/
+
+}

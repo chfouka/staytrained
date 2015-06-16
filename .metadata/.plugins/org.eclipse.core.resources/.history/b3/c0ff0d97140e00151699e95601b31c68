@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collections;
+
+
+public class ArrayStrings {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String test = "abc";
+		char[] s = test.toCharArray();
+		change(s);
+		System.out.println(test);
+		System.out.println(unique(test.toCharArray()));
+		
+		
+		
+	}
+	
+	
+	/**** 
+	 * Implement an algorithm to determine if a string has all unique characters
+	 */
+	static boolean unique( char[] s){
+		BitSet 	mask = new BitSet();
+		
+		for(char c: s){
+			if (mask.get(c))
+				return false;
+			mask.set(c);
+		}
+		return true;
+	}
+	
+	/** same as before without using additional data structures 
+	 * */
+	
+	static void change (char[] s){
+		s[1] = s[2];
+		
+	}
+	
+	char[] mergesort(char[] s, int sx, int dx ){
+		int center;
+		
+	    if (sx < dx) 
+	        center = ( sx + dx) / 2;
+	        mergesort(s, sx, center);
+	        mergesort(s, center+1, dx);
+	       // merge(s, sx, center, dx);
+		return s;
+	}
+	static boolean uniqueness( char[] s){
+		ArrayList<Character> str = new ArrayList<Character>(); 	
+
+		Collections.sort(str);
+		
+		return true;
+		
+	}
+
+}

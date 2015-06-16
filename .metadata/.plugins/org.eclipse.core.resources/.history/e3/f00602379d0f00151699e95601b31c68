@@ -1,0 +1,136 @@
+import java.util.ArrayList;
+import java.util.BitSet;
+
+public class ArrayStrings {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String test = "adxxb";
+		char[] s = test.toCharArray();
+		//System.out.println(s.length);
+		//char[] t = mergesort(s);
+		//System.out.println(unique(test.toCharArray()));
+		System.out.println(uniqueness(s));
+	}
+	
+	
+	/**** 
+	 * Implement an algorithm to determine if a string has all unique characters
+	 */
+	static boolean unique( char[] s ){
+		BitSet 	mask = new BitSet();
+		
+		for(char c: s){
+			if (mask.get(c))
+				return false;
+			mask.set(c);
+		}
+		return true;
+	}
+	
+	/** same as before without using additional data structures 
+	 * */
+	
+	
+	static char[] mergesort(char[] s){
+		if (s.length == 1)
+			return s;
+		
+		int center = s.length / 2  ;
+		int rst = s.length % 2;
+		
+		char[] s1 = new char[center];
+		char[] s2 = new char[center + rst];
+		int k = 0;
+		
+		for(int i = 0; i<center; i++){
+			s1[i] = s[k];
+			k++;
+		}
+		
+		for(int i = 0; i<center + rst; i++){
+			s2[i] = s[k];
+			k ++;
+		}
+		
+		//System.out.println(s1);
+		//system.out.println(s2);
+		
+		char[] t1 = mergesort(s1);
+		char [] t2 = mergesort(s2);
+		
+		return merge(t1, t2);
+		//return null;
+		
+	}
+	
+	static char[] merge(char[] s1, char[] s2){
+		char[] r = new char[s1.length + s2.length]; 
+		int k = 0;
+		int i = 0;
+		int j = 0;
+		
+		while( (i< s1.length) && (j< s2.length) ){
+			if(s1[i] < s2[j]){
+				r[k] = s1[i];
+				i++;
+				k++;
+			}
+			
+			else{
+				r[k] = s2[j];
+				j++;
+				k++;
+			}
+		}
+		
+		for( ; i< s1.length; i++){
+			r[k] = s1[i];
+			k ++;
+		}
+		
+		for(; j< s2.length; j++){
+			r[k] = s2[j] ;
+			k ++;
+		}		
+			
+	
+		
+		//System.out.println(s);
+			
+		return r;
+		
+	}
+	
+	static boolean uniqueness( char[] s){
+		char [] t = mergesort(s);
+		
+		int i = 0;
+		while( i < t.length - 1 ){
+			if( t[i] == t[i+1] )
+				return false;
+			i++;
+		}
+		return true;
+	}
+	
+	
+	/*static void reverse( char[] s ){
+		if(s.length == 2)
+			return s;
+		
+		else {
+			
+			char[] sm = reverse ( ... );
+			
+			return concat(sm, s[0]);
+			
+		}
+		
+		
+	}*/
+
+}
